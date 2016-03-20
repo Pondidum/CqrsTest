@@ -1,11 +1,13 @@
 ﻿using System;
 using Domain.Events;
+using Domain.Services;
 using Ledger;
 
 namespace Domain
 {
 	public class UserAggregate : AggregateRoot<Guid>
 	{
+		public string Key { get; private set; }
 		public string Name { get; private set; }
 
 		public static UserAggregate Blank()
@@ -17,9 +19,12 @@ namespace Domain
 		{
 		}
 
-		public UserAggregate(string name)
+		public UserAggregate(string key, string name)
 		{
-			ApplyEvent(new UserCreatedEvent(name));
+			if (UserService.IsKeyAvailable(key) == false)
+				throw new KeyInUseException(key);
+
+			ApplyEvent(new UserCreatedEvent(key, name));
 		}
 
 		public void ChangeName(string newName)
@@ -30,6 +35,7 @@ namespace Domain
 
 		private void Handle(UserCreatedEvent e)
 		{
+			Key = e.Key;
 			Name = e.Name;
 		}
 
