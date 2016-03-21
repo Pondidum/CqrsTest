@@ -31,7 +31,7 @@ namespace Tests
 			};
 
 			var store = new InMemoryEventStore();
-			var container = new Container(new DomainRegistry(new ReadModelStore(store, projection)));
+			var container = new Container(new DomainRegistry(new ProjectionStore(store, projection)));
 
 			var mediator = container.GetInstance<IMediator>();
 

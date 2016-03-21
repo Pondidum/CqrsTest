@@ -6,11 +6,11 @@ using Ledger.Stores;
 
 namespace Tests
 {
-	public class ReadModelStore : InterceptingEventStore
+	public class ProjectionStore : InterceptingEventStore
 	{
-		private Action<DomainEvent<Guid>> _projection;
+		private readonly Action<DomainEvent<Guid>> _projection;
 
-		public ReadModelStore(IEventStore other, Action<DomainEvent<Guid>> projection) : base(other)
+		public ProjectionStore(IEventStore other, Action<DomainEvent<Guid>> projection) : base(other)
 		{
 			_projection = projection;
 		}
