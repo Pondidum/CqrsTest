@@ -6,6 +6,7 @@ using Domain.Events;
 using Ledger;
 using Ledger.Stores;
 using MediatR;
+using ReadModels;
 using Shouldly;
 using StructureMap;
 using Xunit;
@@ -25,9 +26,11 @@ namespace Tests
 		[Fact]
 		public void When_testing_something()
 		{
+			var users = new AllUsers();
+
 			Action<DomainEvent<Guid>> projection = e =>
 			{
-				
+				users.Project(e);
 			};
 
 			var store = new InMemoryEventStore();
@@ -43,6 +46,7 @@ namespace Tests
 
 			response.ShouldBe(CommandStatus.Accepted);
 			store.AllEvents.Single().ShouldBeOfType<UserCreatedEvent>();
+			users.Names.Single().ShouldBe("Andy");
 		}
 	}
 }

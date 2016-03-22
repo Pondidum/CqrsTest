@@ -7,18 +7,19 @@ namespace ReadModels
 {
 	public class AllUsers
 	{
-		public Dictionary<Guid, string> Users { get; }
+		public IEnumerable<string> Names => _users.Values;
 		 
 		private readonly Dictionary<Type, Action<DomainEvent<Guid>>> _projections;
+		private readonly Dictionary<Guid, string> _users;
 
 		public AllUsers()
 		{
 			_projections = new Dictionary<Type, Action<DomainEvent<Guid>>>();
 
-			Users = new Dictionary<Guid, string>();
+			_users = new Dictionary<Guid, string>();
 
-			Register<UserCreatedEvent>(e => Users[e.AggregateID] = e.Name);
-			Register<UserNameChangedEvent>(e => Users[e.AggregateID] = e.NewName);
+			Register<UserCreatedEvent>(e => _users[e.AggregateID] = e.Name);
+			Register<UserNameChangedEvent>(e => _users[e.AggregateID] = e.NewName);
 		}
 
 		private void Register<TEvent>(Action<TEvent> projection) where TEvent : DomainEvent<Guid>

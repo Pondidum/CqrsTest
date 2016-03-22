@@ -93,6 +93,10 @@
       <Project>{620201bb-5e38-4c01-99f2-73ae428757fe}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ReadModels\ReadModels.csproj">
+      <Project>{387D5802-4230-4F2C-9935-FD3F7643B92F}</Project>
+      <Name>ReadModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
