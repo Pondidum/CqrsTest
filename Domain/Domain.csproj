@@ -52,8 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandHandlers\ChangeUsersNameCommandHandler.cs" />
     <Compile Include="CommandHandlers\CreateUserCommandHandler.cs" />
     <Compile Include="CommandStatus.cs" />
+    <Compile Include="Commands\ChangeUsersNameCommand.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
     <Compile Include="KeyInUseException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

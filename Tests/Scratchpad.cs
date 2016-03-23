@@ -38,15 +38,23 @@ namespace Tests
 
 			var mediator = container.GetInstance<IMediator>();
 
-			var response = mediator.Send(new CreateUserCommand
+			mediator.Send(new CreateUserCommand
 			{
 				Key = "001",
 				Name = "Andy"
-			});
+			}).ShouldBe(CommandStatus.Accepted);
 
-			response.ShouldBe(CommandStatus.Accepted);
 			store.AllEvents.Single().ShouldBeOfType<UserCreatedEvent>();
 			users.Names.Single().ShouldBe("Andy");
+
+			mediator.Send(new ChangeUsersNameCommand
+			{
+				UserID = store.AllEvents.Cast<DomainEvent<Guid>>().Single().AggregateID,
+				NewName = "Andrew"
+			}).ShouldBe(CommandStatus.Accepted);
+
+
+			users.Names.Single().ShouldBe("Andrew");
 		}
 	}
 }
