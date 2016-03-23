@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Services;
 using Ledger;
 using MediatR;
 using StructureMap;
@@ -27,6 +28,8 @@ namespace Tests
 			For<IMediator>().Use<Mediator>();
 
 			For<IEventStore>().Use(store);
+
+			For<UserService>().Singleton();
 		}
 	}
 }

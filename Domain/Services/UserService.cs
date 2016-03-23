@@ -8,25 +8,25 @@ namespace Domain.Services
 {
 	public class UserService
 	{
-		private static readonly HashSet<string> KnownKeys;
-		private static readonly Projector Projections;
+		private readonly HashSet<string> _knownKeys;
+		private readonly Projector _projections;
 
-		static UserService()
+		public UserService()
 		{
-			KnownKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-			Projections = new Projector();
+			_knownKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			_projections = new Projector();
 
-			Projections.Register<UserCreatedEvent>(e => KnownKeys.Add(e.Key));
+			_projections.Register<UserCreatedEvent>(e => _knownKeys.Add(e.Key));
 		}
 
-		public static void Project(DomainEvent<Guid> e)
+		public  void Project(DomainEvent<Guid> e)
 		{
-			Projections.Apply(e);
+			_projections.Apply(e);
 		}
 
-		public static bool IsKeyAvailable(string key)
+		public  bool IsKeyAvailable(string key)
 		{
-			return KnownKeys.Contains(key) == false;
+			return _knownKeys.Contains(key) == false;
 		}
 	}
 }

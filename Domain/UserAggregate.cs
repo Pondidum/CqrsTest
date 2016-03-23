@@ -19,9 +19,9 @@ namespace Domain
 		{
 		}
 
-		public UserAggregate(string key, string name)
+		public UserAggregate(UserService userService, string key, string name)
 		{
-			if (UserService.IsKeyAvailable(key) == false)
+			if (userService.IsKeyAvailable(key) == false)
 				throw new KeyInUseException(key);
 
 			ApplyEvent(new UserCreatedEvent(Guid.NewGuid(), key, name));
