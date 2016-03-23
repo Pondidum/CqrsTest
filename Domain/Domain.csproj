@@ -57,6 +57,7 @@
     <Compile Include="CommandStatus.cs" />
     <Compile Include="Commands\ChangeUsersNameCommand.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
+    <Compile Include="Infrastructure\Projector.cs" />
     <Compile Include="KeyInUseException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserService.cs" />
