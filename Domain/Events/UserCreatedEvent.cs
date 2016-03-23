@@ -8,8 +8,9 @@ namespace Domain.Events
 		public string Key { get; private set; }
 		public string Name { get; private set; }
 
-		public UserCreatedEvent(string key, string name)
+		public UserCreatedEvent(Guid id, string key, string name)
 		{
+			AggregateID = id;
 			Key = key;
 			Name = name;
 		}

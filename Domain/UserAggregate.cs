@@ -24,7 +24,7 @@ namespace Domain
 			if (UserService.IsKeyAvailable(key) == false)
 				throw new KeyInUseException(key);
 
-			ApplyEvent(new UserCreatedEvent(key, name));
+			ApplyEvent(new UserCreatedEvent(Guid.NewGuid(), key, name));
 		}
 
 		public void ChangeName(string newName)
@@ -35,6 +35,7 @@ namespace Domain
 
 		private void Handle(UserCreatedEvent e)
 		{
+			ID = e.AggregateID;
 			Key = e.Key;
 			Name = e.Name;
 		}
