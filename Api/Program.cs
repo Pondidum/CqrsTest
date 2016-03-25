@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Services;
+using Ledger.Stores;
 using Microsoft.Owin.Hosting;
+using StructureMap;
 
 namespace Api
 {
@@ -13,7 +12,15 @@ namespace Api
 		{
 			var url = "http://localhost:3030";
 
-			using (WebApp.Start<Api>(url))
+			var store = new InMemoryEventStore();
+			var container = new Container(new ApiRegistry(store));
+
+			var sp = container.GetInstance<ServiceProjections>();
+			sp.Configure();
+
+			var api = container.GetInstance<Api>();
+
+			using (WebApp.Start(url, app => api.Configuration(app)))
 			{
 				Console.WriteLine("Api started, listening on {0}", url);
 				Console.WriteLine("Press any key to exit...");
@@ -22,4 +29,5 @@ namespace Api
 			}
 		}
 	}
+	
 }
