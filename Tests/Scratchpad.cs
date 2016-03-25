@@ -28,18 +28,11 @@ namespace Tests
 		[Fact]
 		public void You_cant_create_duplicate_entries()
 		{
-			var projections = new Projectionist();
-
 			var store = new InMemoryEventStore();
-			var container = new Container(new TestRegistry(new ProjectionStore(store, projections.Apply)));
+			var container = new Container(new TestRegistry(store));
 
-			var userService = container.GetInstance<UserService>();
-
-			var users = new AllUsers();
-
-			projections
-				.Add(users.Project)
-				.Add(userService.Project);
+			container.GetInstance<ServiceProjections>().Configure();
+			container.GetInstance<ReadModelProjections>().Configure();
 
 			var mediator = container.GetInstance<IMediator>();
 
@@ -63,18 +56,13 @@ namespace Tests
 		[Fact]
 		public void When_testing_something()
 		{
-			//var projections = new Projectionist(Enumerable.Empty<IProjection>());
-
 			var store = new InMemoryEventStore();
-			var container = new Container(new TestRegistry(new ProjectionStore(store, projections.Apply)));
+			var container = new Container(new TestRegistry(store));
 
-			var userService = container.GetInstance<UserService>();
+			container.GetInstance<ServiceProjections>().Configure();
+			container.GetInstance<ReadModelProjections>().Configure();
 
-			var users = new AllUsers();
-
-			//projections
-			//	.Add(users.Project)
-			//	.Add(userService.Project);
+			var users = container.GetInstance<AllUsers>();
 
 			var mediator = container.GetInstance<IMediator>();
 
