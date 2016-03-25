@@ -4,7 +4,7 @@ using Ledger;
 using Ledger.Infrastructure;
 using Ledger.Stores;
 
-namespace Tests
+namespace Domain.Infrastructure
 {
 	public class ProjectionStore : InterceptingEventStore
 	{

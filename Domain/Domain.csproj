@@ -42,6 +42,14 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StructureMap, Version=4.1.1.372, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.1.1.372\lib\net40\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap.Net4, Version=4.1.1.372, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.4.1.1.372\lib\net40\StructureMap.Net4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -57,9 +65,13 @@
     <Compile Include="CommandStatus.cs" />
     <Compile Include="Commands\ChangeUsersNameCommand.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
+    <Compile Include="Infrastructure\DomainRegistry.cs" />
+    <Compile Include="Infrastructure\Projectionist.cs" />
+    <Compile Include="Infrastructure\ProjectionStore.cs" />
     <Compile Include="Infrastructure\Projector.cs" />
     <Compile Include="KeyInUseException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServiceProjections.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="UserAggregate.cs" />
     <Compile Include="Events\UserCreatedEvent.cs" />

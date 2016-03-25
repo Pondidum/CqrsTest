@@ -3,6 +3,7 @@ using System.Linq;
 using Domain;
 using Domain.Commands;
 using Domain.Events;
+using Domain.Infrastructure;
 using Domain.Services;
 using Ledger;
 using Ledger.Stores;
@@ -30,7 +31,7 @@ namespace Tests
 			var projections = new Projectionist();
 
 			var store = new InMemoryEventStore();
-			var container = new Container(new DomainRegistry(new ProjectionStore(store, projections.Apply)));
+			var container = new Container(new TestRegistry(new ProjectionStore(store, projections.Apply)));
 
 			var userService = container.GetInstance<UserService>();
 
@@ -62,18 +63,18 @@ namespace Tests
 		[Fact]
 		public void When_testing_something()
 		{
-			var projections =new Projectionist();
+			//var projections = new Projectionist(Enumerable.Empty<IProjection>());
 
 			var store = new InMemoryEventStore();
-			var container = new Container(new DomainRegistry(new ProjectionStore(store, projections.Apply)));
+			var container = new Container(new TestRegistry(new ProjectionStore(store, projections.Apply)));
 
 			var userService = container.GetInstance<UserService>();
 
 			var users = new AllUsers();
 
-			projections
-				.Add(users.Project)
-				.Add(userService.Project);
+			//projections
+			//	.Add(users.Project)
+			//	.Add(userService.Project);
 
 			var mediator = container.GetInstance<IMediator>();
 

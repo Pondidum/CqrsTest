@@ -80,11 +80,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainRegistry.cs" />
-    <Compile Include="Projectionist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProjectionStore.cs" />
     <Compile Include="Scratchpad.cs" />
+    <Compile Include="TestRegistry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -19,12 +19,12 @@ namespace Domain.Services
 			_projections.Register<UserCreatedEvent>(e => _knownKeys.Add(e.Key));
 		}
 
-		public  void Project(DomainEvent<Guid> e)
+		public void Project(DomainEvent<Guid> e)
 		{
 			_projections.Apply(e);
 		}
 
-		public  bool IsKeyAvailable(string key)
+		public bool IsKeyAvailable(string key)
 		{
 			return _knownKeys.Contains(key) == false;
 		}

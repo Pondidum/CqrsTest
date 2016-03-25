@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Ledger;
 
-namespace Tests
+namespace Domain.Infrastructure
 {
 	public class Projectionist
 	{
